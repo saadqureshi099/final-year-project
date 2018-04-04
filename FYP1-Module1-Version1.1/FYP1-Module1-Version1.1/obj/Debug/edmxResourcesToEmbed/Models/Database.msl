@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="fypModelStoreContainer" CdmEntityContainer="fypEntities">
+    <EntitySetMapping Name="fyp_group">
+      <EntityTypeMapping TypeName="fypModel.fyp_group">
+        <MappingFragment StoreEntitySet="fyp_group">
+          <ScalarProperty Name="group_id" ColumnName="group_id" />
+          <ScalarProperty Name="group_member1" ColumnName="group_member1" />
+          <ScalarProperty Name="group_member2" ColumnName="group_member2" />
+          <ScalarProperty Name="group_member3" ColumnName="group_member3" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="students">
+      <EntityTypeMapping TypeName="fypModel.student">
+        <MappingFragment StoreEntitySet="student">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RollNumber" ColumnName="RollNumber" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="teachers">
+      <EntityTypeMapping TypeName="fypModel.teacher">
+        <MappingFragment StoreEntitySet="teacher">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="conversations">
+      <EntityTypeMapping TypeName="fypModel.conversation">
+        <MappingFragment StoreEntitySet="conversation">
+          <ScalarProperty Name="group" ColumnName="group" />
+          <ScalarProperty Name="idea" ColumnName="idea" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="message" ColumnName="message" />
+          <ScalarProperty Name="idconversation" ColumnName="idconversation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="milestones">
+      <EntityTypeMapping TypeName="fypModel.milestone">
+        <MappingFragment StoreEntitySet="milestones">
+          <ScalarProperty Name="idregistration" ColumnName="idregistration" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="complexity" ColumnName="complexity" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="idmileStones" ColumnName="idmileStones" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="notifications">
+      <EntityTypeMapping TypeName="fypModel.notification">
+        <MappingFragment StoreEntitySet="notification">
+          <ScalarProperty Name="registration" ColumnName="registration" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="seen" ColumnName="seen" />
+          <ScalarProperty Name="notifier" ColumnName="notifier" />
+          <ScalarProperty Name="idea" ColumnName="idea" />
+          <ScalarProperty Name="group" ColumnName="group" />
+          <ScalarProperty Name="idnotification" ColumnName="idnotification" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="registrations">
+      <EntityTypeMapping TypeName="fypModel.registration">
+        <MappingFragment StoreEntitySet="registration">
+          <ScalarProperty Name="co_supervisorEmail" ColumnName="co-supervisorEmail" />
+          <ScalarProperty Name="approve" ColumnName="approve" />
+          <ScalarProperty Name="registrationcol" ColumnName="registrationcol" />
+          <ScalarProperty Name="co_supervisorName" ColumnName="co-supervisorName" />
+          <ScalarProperty Name="idea" ColumnName="idea" />
+          <ScalarProperty Name="supervisor" ColumnName="supervisor" />
+          <ScalarProperty Name="fypgroup" ColumnName="fypgroup" />
+          <ScalarProperty Name="idRegistration" ColumnName="idRegistration" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iterations">
+      <EntityTypeMapping TypeName="fypModel.iteration">
+        <MappingFragment StoreEntitySet="iteration">
+          <ScalarProperty Name="iterationId" ColumnName="iterationId" />
+          <ScalarProperty Name="milestoneId" ColumnName="milestoneId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ideas">
+      <EntityTypeMapping TypeName="fypModel.idea">
+        <MappingFragment StoreEntitySet="idea">
+          <ScalarProperty Name="approve" ColumnName="approve" />
+          <ScalarProperty Name="checker" ColumnName="checker" />
+          <ScalarProperty Name="PostedByStudent" ColumnName="PostedByStudent" />
+          <ScalarProperty Name="PostedByTeacher" ColumnName="PostedByTeacher" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

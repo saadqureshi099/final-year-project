@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="fypModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="conversation">
+    <Key>
+      <PropertyRef Name="idconversation" />
+    </Key>
+    <Property Name="idconversation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="message" Type="text" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="time" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="idea" Type="int" Nullable="false" />
+    <Property Name="group" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="fyp_group">
+    <Key>
+      <PropertyRef Name="group_id" />
+    </Key>
+    <Property Name="group_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="group_member1" Type="int" Nullable="false" />
+    <Property Name="group_member2" Type="int" Nullable="false" />
+    <Property Name="group_member3" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="idea">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="Description" Type="text" Nullable="false" />
+    <Property Name="Category" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="PostedByTeacher" Type="int" />
+    <Property Name="PostedByStudent" Type="int" />
+    <Property Name="checker" Type="int" Nullable="false" />
+    <Property Name="approve" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="iteration">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="milestoneId" Type="int" Nullable="false" />
+    <Property Name="iterationId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="milestones">
+    <Key>
+      <PropertyRef Name="idmileStones" />
+    </Key>
+    <Property Name="idmileStones" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="complexity" Type="int" Nullable="false" />
+    <Property Name="description" Type="text" Nullable="false" />
+    <Property Name="idregistration" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="notification">
+    <Key>
+      <PropertyRef Name="idnotification" />
+    </Key>
+    <Property Name="idnotification" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="group" Type="int" Nullable="false" />
+    <Property Name="idea" Type="int" Nullable="false" />
+    <Property Name="notifier" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="seen" Type="int" Nullable="false" />
+    <Property Name="type" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="time" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="registration" Type="int" />
+  </EntityType>
+  <EntityType Name="registration">
+    <Key>
+      <PropertyRef Name="idRegistration" />
+    </Key>
+    <Property Name="idRegistration" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fypgroup" Type="int" Nullable="false" />
+    <Property Name="supervisor" Type="int" Nullable="false" />
+    <Property Name="idea" Type="int" Nullable="false" />
+    <Property Name="co-supervisorName" Type="varchar" MaxLength="45" />
+    <Property Name="registrationcol" Type="varchar" MaxLength="45" />
+    <Property Name="approve" Type="int" Nullable="false" />
+    <Property Name="co-supervisorEmail" Type="varchar" MaxLength="45" Nullable="false" />
+  </EntityType>
+  <EntityType Name="student">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="RollNumber" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="45" Nullable="false" />
+  </EntityType>
+  <EntityType Name="teacher">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="45" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_FYPGROUP">
+    <End Role="fyp_group" Type="Self.fyp_group" Multiplicity="1" />
+    <End Role="registration" Type="Self.registration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fyp_group">
+        <PropertyRef Name="group_id" />
+      </Principal>
+      <Dependent Role="registration">
+        <PropertyRef Name="fypgroup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDEA">
+    <End Role="idea" Type="Self.idea" Multiplicity="1" />
+    <End Role="registration" Type="Self.registration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="idea">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="registration">
+        <PropertyRef Name="idea" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MILESTONE">
+    <End Role="milestones" Type="Self.milestones" Multiplicity="1" />
+    <End Role="iteration" Type="Self.iteration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="milestones">
+        <PropertyRef Name="idmileStones" />
+      </Principal>
+      <Dependent Role="iteration">
+        <PropertyRef Name="milestoneId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_REG">
+    <End Role="registration" Type="Self.registration" Multiplicity="1" />
+    <End Role="milestones" Type="Self.milestones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="registration">
+        <PropertyRef Name="idRegistration" />
+      </Principal>
+      <Dependent Role="milestones">
+        <PropertyRef Name="idregistration" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_REGIS">
+    <End Role="registration" Type="Self.registration" Multiplicity="0..1" />
+    <End Role="notification" Type="Self.notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="registration">
+        <PropertyRef Name="idRegistration" />
+      </Principal>
+      <Dependent Role="notification">
+        <PropertyRef Name="registration" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STUDENT">
+    <End Role="student" Type="Self.student" Multiplicity="0..1" />
+    <End Role="idea" Type="Self.idea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="student">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="idea">
+        <PropertyRef Name="PostedByStudent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SUPERVISOR">
+    <End Role="teacher" Type="Self.teacher" Multiplicity="1" />
+    <End Role="registration" Type="Self.registration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="teacher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="registration">
+        <PropertyRef Name="supervisor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TEACHER">
+    <End Role="teacher" Type="Self.teacher" Multiplicity="0..1" />
+    <End Role="idea" Type="Self.idea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="teacher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="idea">
+        <PropertyRef Name="PostedByTeacher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKEY_GROUP">
+    <End Role="fyp_group" Type="Self.fyp_group" Multiplicity="1" />
+    <End Role="conversation" Type="Self.conversation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fyp_group">
+        <PropertyRef Name="group_id" />
+      </Principal>
+      <Dependent Role="conversation">
+        <PropertyRef Name="group" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKEY_IDEA">
+    <End Role="idea" Type="Self.idea" Multiplicity="1" />
+    <End Role="conversation" Type="Self.conversation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="idea">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="conversation">
+        <PropertyRef Name="idea" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkid">
+    <End Role="fyp_group" Type="Self.fyp_group" Multiplicity="1" />
+    <End Role="notification" Type="Self.notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fyp_group">
+        <PropertyRef Name="group_id" />
+      </Principal>
+      <Dependent Role="notification">
+        <PropertyRef Name="group" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GROUP_MEMBER1">
+    <End Role="student" Type="Self.student" Multiplicity="1" />
+    <End Role="fyp_group" Type="Self.fyp_group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="student">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="fyp_group">
+        <PropertyRef Name="group_member1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GROUP_MEMBER2">
+    <End Role="student" Type="Self.student" Multiplicity="1" />
+    <End Role="fyp_group" Type="Self.fyp_group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="student">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="fyp_group">
+        <PropertyRef Name="group_member2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GROUP_MEMBER3">
+    <End Role="student" Type="Self.student" Multiplicity="1" />
+    <End Role="fyp_group" Type="Self.fyp_group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="student">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="fyp_group">
+        <PropertyRef Name="group_member3" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="idFk">
+    <End Role="idea" Type="Self.idea" Multiplicity="1" />
+    <End Role="notification" Type="Self.notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="idea">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="notification">
+        <PropertyRef Name="idea" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="fypModelStoreContainer">
+    <EntitySet Name="conversation" EntityType="Self.conversation" Schema="fyp" store:Type="Tables" />
+    <EntitySet Name="fyp_group" EntityType="Self.fyp_group" Schema="fyp" store:Type="Tables" />
+    <EntitySet Name="idea" EntityType="Self.idea" Schema="fyp" store:Type="Tables" />
+    <EntitySet Name="iteration" EntityType="Self.iteration" Schema="fyp" store:Type="Tables" />
+    <EntitySet Name="milestones" EntityType="Self.milestones" Schema="fyp" store:Type="Tables" />
+    <EntitySet Name="notification" EntityType="Self.notification" Schema="fyp" store:Type="Tables" />
+    <EntitySet Name="registration" EntityType="Self.registration" Schema="fyp" store:Type="Tables" />
+    <EntitySet Name="student" EntityType="Self.student" Schema="fyp" store:Type="Tables" />
+    <EntitySet Name="teacher" EntityType="Self.teacher" Schema="fyp" store:Type="Tables" />
+    <AssociationSet Name="FK_FYPGROUP" Association="Self.FK_FYPGROUP">
+      <End Role="fyp_group" EntitySet="fyp_group" />
+      <End Role="registration" EntitySet="registration" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDEA" Association="Self.FK_IDEA">
+      <End Role="idea" EntitySet="idea" />
+      <End Role="registration" EntitySet="registration" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MILESTONE" Association="Self.FK_MILESTONE">
+      <End Role="milestones" EntitySet="milestones" />
+      <End Role="iteration" EntitySet="iteration" />
+    </AssociationSet>
+    <AssociationSet Name="FK_REG" Association="Self.FK_REG">
+      <End Role="registration" EntitySet="registration" />
+      <End Role="milestones" EntitySet="milestones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_REGIS" Association="Self.FK_REGIS">
+      <End Role="registration" EntitySet="registration" />
+      <End Role="notification" EntitySet="notification" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STUDENT" Association="Self.FK_STUDENT">
+      <End Role="student" EntitySet="student" />
+      <End Role="idea" EntitySet="idea" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SUPERVISOR" Association="Self.FK_SUPERVISOR">
+      <End Role="teacher" EntitySet="teacher" />
+      <End Role="registration" EntitySet="registration" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TEACHER" Association="Self.FK_TEACHER">
+      <End Role="teacher" EntitySet="teacher" />
+      <End Role="idea" EntitySet="idea" />
+    </AssociationSet>
+    <AssociationSet Name="FKEY_GROUP" Association="Self.FKEY_GROUP">
+      <End Role="fyp_group" EntitySet="fyp_group" />
+      <End Role="conversation" EntitySet="conversation" />
+    </AssociationSet>
+    <AssociationSet Name="FKEY_IDEA" Association="Self.FKEY_IDEA">
+      <End Role="idea" EntitySet="idea" />
+      <End Role="conversation" EntitySet="conversation" />
+    </AssociationSet>
+    <AssociationSet Name="fkid" Association="Self.fkid">
+      <End Role="fyp_group" EntitySet="fyp_group" />
+      <End Role="notification" EntitySet="notification" />
+    </AssociationSet>
+    <AssociationSet Name="GROUP_MEMBER1" Association="Self.GROUP_MEMBER1">
+      <End Role="student" EntitySet="student" />
+      <End Role="fyp_group" EntitySet="fyp_group" />
+    </AssociationSet>
+    <AssociationSet Name="GROUP_MEMBER2" Association="Self.GROUP_MEMBER2">
+      <End Role="student" EntitySet="student" />
+      <End Role="fyp_group" EntitySet="fyp_group" />
+    </AssociationSet>
+    <AssociationSet Name="GROUP_MEMBER3" Association="Self.GROUP_MEMBER3">
+      <End Role="student" EntitySet="student" />
+      <End Role="fyp_group" EntitySet="fyp_group" />
+    </AssociationSet>
+    <AssociationSet Name="idFk" Association="Self.idFk">
+      <End Role="idea" EntitySet="idea" />
+      <End Role="notification" EntitySet="notification" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

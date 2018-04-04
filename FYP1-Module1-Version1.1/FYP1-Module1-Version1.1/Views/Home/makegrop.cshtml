@@ -1,0 +1,40 @@
+﻿@model FYP1_Module1_Version1._1.Models.fyp_group
+
+@{
+    Layout = null;
+}
+<h2>MakeGroup</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Select Your FYP group members</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.group_member1, "Group Member 1", htmlAttributes: new { @class = "control-label col-md-2", required = "required"})
+            <div class="col-md-10">
+                @Html.DropDownListFor(Model => Model.group_member1, new SelectList(Model.students, "Id", "Name"), "Please select")
+               
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.group_member2, "Group member 2", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(Model => Model.group_member2, new SelectList(Model.students, "Id", "Name"), "Please select")
+                @Html.ValidationMessageFor(model => model.group_member2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
